@@ -1,0 +1,14 @@
+{
+    "model": "user.UserGroup",
+    "fields": {
+        "name": "reception_volunteer",
+        "permissions": [
+            "member::Member | view, list, add, update",
+            "member.basic::Address | view, update",
+            "member.basic::Contact | view, update",
+            "member.basic::Income | view, update",
+            "member.basic::Name | view, update",
+            "member.basic::ResidentialStatus | view, update"
+        ]
+    }
+}

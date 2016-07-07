@@ -1,0 +1,17 @@
+[
+    {
+        "model": "member.Contact",
+        "pk": 1,
+        "fields": {
+            "email": "ovangle@gmail.com",
+            "phone": "0243903089"
+        }
+    },
+    {
+        "model": "member.Contact",
+        "pk": 50,
+        "fields": {
+            "email": "leith.stephenson@gmail.com" 
+        }
+    }
+]

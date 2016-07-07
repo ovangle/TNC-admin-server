@@ -1,0 +1,18 @@
+[
+    {
+        "model": "member.EnergyAccount",
+        "pk": 1,
+        "fields": {
+            "retailer": "NOT_DISCLOSED",
+            "account_number": ""
+        }
+    },
+    {
+        "model": "member.EnergyAccount",
+        "pk": 50,
+        "fields": {
+            "retailer": "NOT_DISCLOSED",
+            "account_number": ""
+        }
+    }
+]

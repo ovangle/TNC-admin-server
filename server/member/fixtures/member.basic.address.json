@@ -1,0 +1,20 @@
+[
+    {
+        "model": "member.Address",
+        "pk": 1,
+        "fields": {
+            "street": "17 Emu Drive",
+            "city": "San Remo",
+            "postcode": "2262"
+        }
+    },
+    {
+        "model": "member.Address",
+        "pk": 50,
+        "fields": {
+            "street": "17 Emu Drive",
+            "city": "San Remo",
+            "postcode": "2262"
+        }
+    }
+]   

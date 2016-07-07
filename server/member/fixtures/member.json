@@ -1,0 +1,38 @@
+[
+    {
+        "model": "member.Member",
+        "pk": 1,
+        "fields": {
+            "name_id": 1,
+            "gender": "MALE",
+            "date_of_birth": "1983-12-15",
+            "aboriginal_or_torres_strait_islander": false,
+            "register_consent": false,
+            "address_id": 1,
+            "residential_status_id": 1,
+            "contact_id": 1,
+            "energy_account_id": 1,
+            "income_id": 1,
+            "is_partnered": false,
+            "carer_id": 1
+        }
+    },
+    {
+        "model": "member.Member",
+        "pk": 50,
+        "fields": {
+            "name_id": 50,
+            "gender": "FEMALE",
+            "date_of_birth": "1986-12-19",
+            "aboriginal_or_torres_strait_islander": false,
+            "register_consent": false,
+            "address_id": 50,
+            "residential_status_id": 50,
+            "contact_id": 50,
+            "energy_account_id": 50,
+            "income_id": 50,
+            "is_partnered": false,
+            "carer_id": 50
+        }
+    }
+]

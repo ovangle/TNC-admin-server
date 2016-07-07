@@ -1,0 +1,36 @@
+[
+    {
+        "model": "member.Voucher",
+        "pk": 1,
+        "fields": {
+            "date_issued": "2016-06-16",
+            "member_id": 1
+        }
+    },
+    {
+        "model": "member.EAPAVoucher",
+        "pk": 1,
+        "fields": {
+            "voucher_ptr_id": 1,
+            "assessment_id": 1
+        }
+    },
+    {
+        "model": "member.Voucher",
+        "pk": 2,
+        "fields": {
+            "date_issued": "2016-06-16",
+            "member_id": 1
+        }
+    },
+    {
+        "model": "member.FoodcareVoucher",
+        "pk": 1,
+        "fields": {
+            "voucher_ptr_id": 2,
+            "value": 5, 
+            "expires": "2016-06-23",
+            "redeemed": false
+        }
+    }
+]

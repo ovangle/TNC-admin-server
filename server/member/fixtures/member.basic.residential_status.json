@@ -1,0 +1,18 @@
+[
+    {
+        "model": "member.ResidentialStatus",
+        "pk": 1,
+        "fields": {
+            "type": "CARAVAN_PARK",
+            "stability": "PERMANENT"
+        }
+    },
+    {
+        "model": "member.ResidentialStatus",
+        "pk": 50,
+        "fields": {
+            "type": "PRIVATE_RENTAL_LANDLORD",
+            "stability": "PERMANENT"
+        }
+    }
+]

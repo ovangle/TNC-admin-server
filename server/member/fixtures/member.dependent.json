@@ -1,0 +1,10 @@
+[
+    {
+        "model": "member.Dependent",
+        "pk": 50,
+        "fields": {
+            "name_id": 51,
+            "date_of_birth": "2010-08-14"
+        }
+    }
+]

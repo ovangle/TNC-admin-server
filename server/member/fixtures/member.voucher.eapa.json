@@ -1,0 +1,38 @@
+[
+    {
+        "model": "member.EAPAAssessment",
+        "pk": 1, 
+        "fields": {
+            "is_no_relation_to_assessor": true,
+            "bill_sighted": true,
+
+            "is_name_on_bill": true,
+            "is_address_on_bill": true,
+
+            "is_residential_electicity_or_gas_account": true,
+
+            "is_experiencing_financial_hardship": true,
+            "is_denying_basic_needs": true,
+            "is_facing_disconnection": true,
+
+            "has_contacted_retailer_to_check_payment_plans": true,
+            "has_contacted_retailer_to_check_energy_rebates": true,
+            "has_contacted_retailer_to_check_updated_balance": true,
+            "has_contacted_retailer_to_check_eapa_payments": true,
+
+            "is_receiving_over_limit_on_current_bill": true,
+            "is_receiving_over_limit_for_financial_year": true,
+            "is_receiving_assistance_more_than_twice": true,
+
+            "limit_exemption_description": "",
+
+            "signed_privacy_agreement": true,
+
+            "is_bill_stamped": true,
+
+            "understood_voucher_processing": true,
+
+            "consent_to_retain_data": true
+        }
+    }
+]

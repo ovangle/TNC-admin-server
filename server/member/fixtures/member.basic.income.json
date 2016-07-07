@@ -1,0 +1,20 @@
+[
+    {
+        "model": "member.Income",   
+        "pk": 1,
+        "fields": {
+            "type": "SELF_EMPLOYED",  
+            "proof_of_low_income": "NO_PROOF",
+            "benefit_type": "NEWSTART"
+        }
+    },
+    {
+        "model": "member.Income",
+        "pk": 50,
+        "fields": {
+            "type": "PARTIALLY_EMPLOYED",
+            "proof_of_low_income": "NO_PROOF",
+            "benefit_type": "NONE"
+        }
+    }
+]

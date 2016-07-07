@@ -1,0 +1,17 @@
+[
+    {
+        "model": "member.Carer",
+        "pk": 1,
+        "fields": {
+            "role": "member::Member"
+        } 
+    },
+    {
+        "model": "member.Carer",
+        "pk": 50,
+        "fields": {
+            "role": "member::Member"
+        }
+    }
+
+]

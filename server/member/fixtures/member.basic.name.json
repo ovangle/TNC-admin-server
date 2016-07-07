@@ -1,0 +1,30 @@
+[
+    {
+        "model": "member.Name",
+        "pk": 1,
+        "fields": {
+            "role": "member::Member",
+            "first_name": "Thomas",
+            "last_name": "Stephenson",
+            "alias": "Tom"
+        }
+    },
+    {
+        "model": "member.Name",
+        "pk": 50,
+        "fields": {
+            "role": "member::Member",
+            "first_name": "Leith",
+            "last_name": "Stephenson"
+        }
+    },
+    {
+        "model": "member.Name",
+        "pk": 51,
+        "fields": {
+            "role": "member::Dependent",
+            "first_name": "Alana",
+            "last_name": "Stephenson"
+        }
+    }
+]
