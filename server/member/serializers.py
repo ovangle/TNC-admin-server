@@ -16,6 +16,7 @@ from .basic.gender import Gender
 from .models import Member
 
 from .carer.models import Carer
+from .membership_term.serializers import MembershipTermSerializer
 
 class MemberSerializer(serializers.Serializer):
     kind = serializers.CharField(read_only=True)
@@ -23,6 +24,7 @@ class MemberSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
 
     name = NameSerializer()
+    term = MembershipTermSerializer()
 
     gender = EnumField(enum_type=Gender)
     date_of_birth = serializers.DateField()
@@ -51,6 +53,8 @@ class MemberSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         name = self.fields['name'].create(validated_data.pop('name'), name_kind=Member.objects.kind)
+        term = self.fields['term'].create(validated_data.pop('term'))
+
         address = self.fields['address'].create(validated_data.pop('address'))
         residential_status = self.fields['residential_status'].create(validated_data.pop('residential_status'))
         contact = self.fields['contact'].create(validated_data.pop('contact'))
@@ -59,6 +63,7 @@ class MemberSerializer(serializers.Serializer):
 
         return Member.objects.create(
             name=name,
+            term=term,
             gender=validated_data.pop('gender'),
             date_of_birth=validated_data.pop('date_of_birth'),
             aboriginal_or_torres_strait_islander=validated_data.pop('aboriginal_or_torres_strait_islander'),
