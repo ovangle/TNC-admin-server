@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^(?P<id>\d+)$', views.MemberDetails.as_view()),
     url(r'^carer/', include(member.carer.urls)),
     url(r'^voucher/', include(member.voucher.urls)),
-    url(r'^notes/', include(member.file_notes.urls))
+    url(r'^filenote/', include(member.file_notes.urls)),
 ]

@@ -7,6 +7,7 @@ from .basic.models import (
 )    
 from .basic.gender import Gender
 from .membership_term.models import MembershipTerm
+from .file_notes.models import MemberFileNote
 
 from .partner.models import Partner
 

@@ -1,23 +1,21 @@
 from django.db import models
-from ext.rest_framework.fields import EnumField
-
-from member.models import Member
-from staff.models import StaffMember
+from ext.django.fields import EnumField
 
 from .severity import Severity
+from .managers import FileNoteManager 
 
-class FileNote(models.Model):
-    staff = models.ManyToOneField(StaffMember)
+class MemberFileNote(models.Model):
+    objects = FileNoteManager()
 
-    member = models.OneToManyField(Member)
+    staff = models.ForeignKey('staff.StaffMember')
+
+    member = models.ForeignKey('member.Member')
 
     # Whether the note is pinned to the member.
     pinned = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now=True)
-    severity = EnumField(
-        enum_type=Severity,
-        default=Severity.info
-    )   
+    created = models.DateTimeField(auto_now_add=True)
+
+    severity = EnumField(enum_type=Severity) 
 
     message = models.TextField()
 

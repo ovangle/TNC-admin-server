@@ -3,10 +3,12 @@ from django.db import models
 from .severity import Severity
 
 class FileNoteManager(models.Manager):
-    def create(self, staff, member, message, severity=Severity.info):
+    kind = 'member.filenote::FileNote'
+
+    def create(self, staff, member_id, message, severity=Severity.info):
         return super(FileNoteManager, self).create(
             staff=staff,
-            member=member,
+            member_id=member_id,
             message=message,
             severity=severity
         )
