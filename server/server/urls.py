@@ -22,7 +22,9 @@ import user.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^member/', include(member.urls)),
-    url(r'^staff/', include(staff.urls)),
-    url(r'^user/', include(user.urls))
+    url(r'^api/', include([
+        url(r'^member/', include(member.urls)),
+        url(r'^staff/', include(staff.urls)),
+        url(r'^user/', include(user.urls))
+    ]))
 ]
