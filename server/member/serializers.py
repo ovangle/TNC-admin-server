@@ -52,7 +52,7 @@ class MemberSerializer(serializers.Serializer):
         return data 
 
     def create(self, validated_data):
-        name = self.fields['name'].create(validated_data.pop('name'), name_kind=Member.objects.kind)
+        name = self.fields['name'].create(validated_data.pop('name'), role=Member.objects.kind)
         term = self.fields['term'].create(validated_data.pop('term'))
 
         address = self.fields['address'].create(validated_data.pop('address'))
