@@ -1,3 +1,5 @@
+from django.http import Http404
+
 from rest_framework import serializers, validators
 from ext.rest_framework.fields import EnumField
 
@@ -62,6 +64,13 @@ class CreateRequestSerializer(serializers.Serializer):
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True, allow_blank=True)
+
+    def validate_username(self, username):
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist: 
+            raise Http404('User does not exist')
+        return username
 
 
