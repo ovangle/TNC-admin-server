@@ -27,7 +27,7 @@ class MemberSerializer(serializers.Serializer):
     term = MembershipTermSerializer()
 
     gender = EnumField(enum_type=Gender)
-    date_of_birth = serializers.DateField()
+    date_of_birth = serializers.DateField(allow_null=True)
     aboriginal_or_torres_strait_islander = serializers.NullBooleanField()
     register_consent = serializers.NullBooleanField()
 

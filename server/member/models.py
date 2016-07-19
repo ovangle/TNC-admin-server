@@ -30,7 +30,7 @@ class Member(models.Model):
     )
 
     gender = EnumField(enum_type=Gender)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True)
     aboriginal_or_torres_strait_islander = models.NullBooleanField()
     register_consent = models.NullBooleanField()
 
