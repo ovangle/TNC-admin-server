@@ -14,7 +14,7 @@ class StaffInductionSurvey(models.Model):
         default=list
     )
 
-    personaility_traits = ArrayField(
+    traits = ArrayField(
         models.CharField(max_length=32),
         default=list
     )
