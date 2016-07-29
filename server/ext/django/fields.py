@@ -33,11 +33,15 @@ class EnumField(Field):
         return name, path, args, kwargs
 
     def get_prep_value(self, value): 
+        if value is None:
+            return ''
         if isinstance(value, self.enum_type):
             value = value.value
         return value    
 
     def from_db_value(self, value, expression, connection, context):
+        if not value:
+            return None
         if value and not isinstance(value, self.enum_type):
             value = self.enum_type(value)
         return value     

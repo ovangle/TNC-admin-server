@@ -12,9 +12,15 @@ class EnumField(Field):
         super(EnumField, self).__init__(**kwargs)    
 
     def to_representation(self, obj):       
+        if obj is None:
+            return obj
+        if isinstance(obj, str):
+            raise ValueError('{0} is not an value of type {1}'.format(obj, self.enum_type))
         return obj.value
 
-    def to_internal_value(self, obj):     
+    def to_internal_value(self, obj):
+        if not obj:
+            return None
         try:
             return self.enum_type(obj)
         except ValueError:    
