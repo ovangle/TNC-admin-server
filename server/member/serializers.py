@@ -15,7 +15,7 @@ from .basic.serializers import (
 from .basic.gender import Gender
 from .models import Member
 
-from .carer.models import Carer
+from .dependent.serializers import DependentSerializer
 from .membership_term.serializers import MembershipTermSerializer
 
 class MemberSerializer(serializers.Serializer):
@@ -37,11 +37,13 @@ class MemberSerializer(serializers.Serializer):
     contact = ContactSerializer()
     income = IncomeSerializer()
 
+    partner_id = serializers.PrimaryKeyRelatedField(
+        queryset=Member.objects.all(), 
+        source='partner', 
+        allow_null=True
+    )
 
-    is_partnered = serializers.NullBooleanField()
-    partner_id = serializers.PrimaryKeyRelatedField(read_only=True, source='partner', allow_null=True)
-
-    carer_id = serializers.PrimaryKeyRelatedField(read_only=True, source='carer')
+    dependents = DependentSerializer(many=True, source='carer.dependent_set')
 
     def validate_kind(self, data):
         kind = data.get('kind', None)
@@ -75,7 +77,8 @@ class MemberSerializer(serializers.Serializer):
             income=income,
             energy_account=energy_account,
 
-            is_partnered = validated_data.pop('is_partnered')
+            partner=validated_data.pop('partner')
+
         )
 
     def update(self, instance, validated_data):

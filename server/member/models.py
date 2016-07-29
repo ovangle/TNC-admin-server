@@ -9,9 +9,7 @@ from .basic.gender import Gender
 from .membership_term.models import MembershipTerm
 from .file_notes.models import MemberFileNote
 
-from .partner.models import Partner
-
-from .carer.models import Carer
+from .dependent.carer.models import Carer
 from .dependent.models import Dependent
 
 from .voucher.models import Voucher
@@ -64,10 +62,24 @@ class Member(models.Model):
         on_delete=models.CASCADE
     )
 
-    is_partnered = models.NullBooleanField()
-    partner = models.OneToOneField(Partner, null=True) 
+    partner = models.OneToOneField('member.Member', null=True, related_name='+') 
     carer = models.OneToOneField(Carer, related_name='member_carer')
 
+    def set_partner(self, partner):
+        if partner == self.partner:
+            return
+        if self.partner is None:
+            if partner is not None:
+                partner.set_partner(self)
+                partner.save()
+        else:
+            if partner is None:
+                self.partner.partner = None
+                self.partner.save()
+            else:
+                self.partner.set_partner(self)
+                self.partner.save()
+        self.partner = partner
 
 def create_carer(instance, created, raw, **kwargs):
     #Ignore fixtures and saves for existing courses

@@ -1,7 +1,10 @@
 from django.db import models
-from ..basic.name.models import Name
-from ..carer.models import Carer
+from ext.django.fields import EnumField
 
+from ..basic.gender import Gender
+from ..basic.name.models import Name
+
+from .carer.models import Carer
 from .carer_rel.models import CarerRel
 
 class Dependent(models.Model):
@@ -13,5 +16,6 @@ class Dependent(models.Model):
         through_fields=('dependent', 'carer')
     ) 
 
-    date_of_birth = models.DateField()
+    gender = EnumField(enum_type=Gender)
+    date_of_birth = models.DateField(null=True)
 

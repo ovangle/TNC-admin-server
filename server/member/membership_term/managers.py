@@ -21,6 +21,10 @@ def membership_expires(membership_type, joined, renewed=None):
     elif membership_type in {MembershipTermType.associate, MembershipTermType.general}:
         # Associate and general memberships expire at the start of the next financial year
         return start_of_next_financial_year(membership_start)
+    elif membership_type == MembershipTermType.partner:
+        if renewed is not None:
+            raise ValueError('Cannot renew PARTNER membership type')
+        return membership_start
     else:
         raise ValueError('Invalid membership term type: "{0}"'.format(type))
 
