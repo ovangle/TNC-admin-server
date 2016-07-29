@@ -3,12 +3,16 @@ from rest_framework import generics
 from .models import StaffMember
 from .serializers import StaffMemberSerializer
 
-class StaffMemberList(generics.ListAPIView):
+class StaffMemberList(generics.ListCreateAPIView):
     queryset = StaffMember.objects.all()
     serializer_class = StaffMemberSerializer
 
-    def create(self, request):
-        return super(StaffMemberList, self).create(request) 
+    def get_serializer_class(self): 
+        if self.request.method == 'GET':
+            return StaffMemberSerializer
+        else:
+            return CreateRequestSerializer
+
 
 class StaffMemberDetails(generics.RetrieveUpdateAPIView):
     queryset = StaffMember.objects.all()

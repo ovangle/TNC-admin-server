@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, validators
 from ext.rest_framework.fields import EnumField
 
 from member.basic.serializers import (
@@ -7,6 +7,7 @@ from member.basic.serializers import (
     NameSerializer 
 )
 from user.models import User
+from user.group.serializers import UserGroupSerializer
 
 from .staff_type import StaffType
 from .availability.serializers import AvailabilitySerializer
@@ -46,4 +47,34 @@ class StaffMemberSerializer(serializers.Serializer):
             availability=StaffMemberSerializer.availability.create(validated_data.pop('availability',dict())),
             date_of_birth=validated_data.pop('date_of_birth') 
         )
+
+
+class CreateRequestSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    password = serializers.CharField(max_length=128, read_only=True, source='_password')
+
+    username = serializers.CharField(
+        validators=[validators.UniqueValidator(queryset=User.objects.all())]
+    )
+    groups = UserGroupSerializer(many=True)
+
+    staff_type = EnumField(enum_type=StaffType, write_only=True)
+    staff_name = NameSerializer(write_only=True)
+
+    def create(self, validated_data):
+        groups = [
+            UserGroup.objects.get(pk=group_data['name']) 
+            for group_data in validated_data.pop('groups')
+        ]
+        user =  User.objects.create(
+            username=validated_data.pop('username'), 
+            groups=groups
+        )
+        staff = StaffMember.objects.create(
+            user=user,
+            type=validated_data.pop('staff_type'),
+            name=validated_data.pop('staff_name')
+        )
+        return user
+
 

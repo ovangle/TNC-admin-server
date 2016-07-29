@@ -4,7 +4,6 @@ from .views import SuggestUniqueUsername, CreateUser, LoginUser, InitializeConte
 from .group.views import UserGroupList
 
 urlpatterns = [
-    url(r'^$', CreateUser.as_view()),
     url(r'^login$', LoginUser.as_view()),
     url(r'^suggest_username$', SuggestUniqueUsername.as_view()),
     url(r'^groups$', UserGroupList.as_view()),
