@@ -28,3 +28,4 @@ class EnumField(Field):
                 'Could not serialize {0} as enum value of {1}'
                 .format(obj, self.enum_type)
             )
+

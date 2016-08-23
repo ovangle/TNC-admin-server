@@ -23,3 +23,15 @@ class Name(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     alias = models.CharField(max_length=32, blank=True)
+
+    def __eq__(self, other):
+        if other is None:
+            return False
+        if other is self:     
+            return True
+        if not isinstance(other, Name):
+            return False
+        return all([
+            self.first_name == other.first_name, 
+            self.last_name == other.last_name
+        ])

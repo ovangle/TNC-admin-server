@@ -7,7 +7,7 @@ from .basic.models import (
 from .basic.serializers import (
     AddressSerializer, 
     ContactSerializer,
-    EnergyAccountSerializer,
+    EnergyAccountsSerializer,
     IncomeSerializer,
     NameSerializer,
     ResidentialStatusSerializer
@@ -32,7 +32,7 @@ class MemberSerializer(serializers.Serializer):
     register_consent = serializers.NullBooleanField()
 
     address = AddressSerializer()
-    energy_account = EnergyAccountSerializer()
+    energy_accounts = EnergyAccountsSerializer()
     residential_status = ResidentialStatusSerializer()
     contact = ContactSerializer()
     income = IncomeSerializer()
@@ -61,7 +61,7 @@ class MemberSerializer(serializers.Serializer):
         residential_status = self.fields['residential_status'].create(validated_data.pop('residential_status'))
         contact = self.fields['contact'].create(validated_data.pop('contact'))
         income = self.fields['income'].create(validated_data.pop('income'))
-        energy_account = self.fields['energy_account'].create(validated_data.pop('energy_account'))
+        energy_account = self.fields['energy_accounts'].create(validated_data.pop('energy_accounts'))
 
         return Member.objects.create(
             name=name,
@@ -78,7 +78,6 @@ class MemberSerializer(serializers.Serializer):
             energy_account=energy_account,
 
             partner=validated_data.pop('partner')
-
         )
 
     def update(self, instance, validated_data):
@@ -96,6 +95,4 @@ class MemberSerializer(serializers.Serializer):
         instance.income = validated_data.get('income', instance.income)
         instance.is_partnered = validated_data.get('is_partnered', instance.is_partnered)
         return instance
-
-
 

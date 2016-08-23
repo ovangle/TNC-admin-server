@@ -26,7 +26,7 @@ class ListCreateFileNotes(generics.ListCreateAPIView):
             qs = qs.filter(staff_id=staff_id)
 
         pinned = (self.request.query_params.get('pinned') == 'true')
-        if pinned is not None:
+        if pinned:
             qs = qs.filter(pinned=pinned)
 
         created_before = self.request.query_params.get('before')

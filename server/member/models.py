@@ -3,9 +3,8 @@ from django.db import models
 from ext.django.fields import EnumField
 
 from .basic.models import (
-    Address, Contact, EnergyAccount, Income, Name, ResidentialStatus
+    Address, Contact, EnergyAccount, EnergyAccountType, Gender, Income, Name, ResidentialStatus,
 )    
-from .basic.gender import Gender
 from .membership_term.models import MembershipTerm
 from .file_notes.models import MemberFileNote
 
@@ -52,9 +51,16 @@ class Member(models.Model):
         on_delete=models.CASCADE
     )
 
-    energy_account = models.OneToOneField(
+    gas_account = models.OneToOneField(
         EnergyAccount,
-        on_delete=models.CASCADE
+        null=True,
+        related_name='+'
+    )
+
+    electricity_account = models.OneToOneField(
+        EnergyAccount,
+        null=True,
+        related_name='+'
     )
 
     income = models.OneToOneField(
@@ -80,6 +86,13 @@ class Member(models.Model):
                 self.partner.set_partner(self)
                 self.partner.save()
         self.partner = partner
+
+    @property
+    def energy_accounts(self):
+        return {
+            'GAS': self.gas_account,
+            'ELECTRICITY': self.electricity_account
+        }
 
 def create_carer(instance, created, raw, **kwargs):
     #Ignore fixtures and saves for existing courses

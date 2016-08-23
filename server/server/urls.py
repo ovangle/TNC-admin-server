@@ -19,12 +19,14 @@ from django.contrib import admin
 import member.urls
 import staff.urls
 import user.urls
+import activity.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include([
         url(r'^member/', include(member.urls)),
         url(r'^staff/', include(staff.urls)),
-        url(r'^user/', include(user.urls))
+        url(r'^user/', include(user.urls)),
+        url(r'^activity/', include(activity.urls))
     ]))
 ]
