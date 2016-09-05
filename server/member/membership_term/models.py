@@ -2,7 +2,7 @@ from django.db import models
 from ext.django.fields import EnumField 
 
 from .term_type import MembershipTermType
-from .managers import MembershipTermManager
+from .managers import MembershipTermManager, membership_expires
 
 class MembershipTerm(models.Model):
     objects = MembershipTermManager()

@@ -35,19 +35,21 @@ class EnergyAccountSerializer(serializers.Serializer):
 
 class EnergyAccountsSerializer(serializers.Serializer):
     # These field names are CAPS because the entries in the accounts dict are enum values
-    GAS = EnergyAccountSerializer(allow_null=True)
-    ELECTRICITY = EnergyAccountSerializer(allow_null=True)
+    GAS = EnergyAccountSerializer(allow_null=True, required=False)
+    ELECTRICITY = EnergyAccountSerializer(allow_null=True, required=False)
 
     def create(self, validated_data):
         created = {}
 
-        gas_account = validated_data.pop('GAS', None)
+        gas_account_data = validated_data.pop('GAS', None)
         if gas_account_data is not None:
-            created['GAS'] = self.fields['GAS'].create(gas_account)
+            gas_account = self.fields['GAS'].create(gas_account_data)
+            created['GAS'] = gas_account
 
         electricity_account_data = validated_data.pop('ELECTRICITY', None)
-        if electricity_account is not None:
-            created['ELECTRICITY'] = self.fields['ELECTRICITY'].create(electricity_account_data)
+        if electricity_account_data is not None:
+            electricity_account = self.fields['ELECTRICIT'].create(electricity_account_data)
+            created['ELECTRICITY'] = electricity_account
 
         return created
 

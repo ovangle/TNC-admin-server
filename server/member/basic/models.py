@@ -5,6 +5,10 @@ from .energy_account.models import EnergyAccount, EnergyAccountBill
 
 from .gender import Gender
 
-from .income.models import Income
+from .income.models import (
+    Income, IncomeType, BenefitType, ProofOfLowIncome
+)
 from .name.models import Name
-from .residential_status.models import ResidentialStatus
+from .residential_status.models import (
+    ResidentialStatus, ResidenceType, ResidentialStability
+)   

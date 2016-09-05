@@ -9,19 +9,17 @@ class MemberManager(models.Manager):
         return 'member::Member'
 
     def create(self, carer_rels=None, **kwargs):
-        kwargs['carer'] = Carer.member_carers.create()
+        kwargs['carer'] = Carer.objects.create()
 
         dependents = kwargs.pop('dependents', list)
         carer_rels = carer_rels or []
 
         member = super(MemberManager, self).create(**kwargs)
 
-        # Overwrite the existing partner on the member's partner
-        partner.set_partner(member)
+        partner = member.partner
 
-        for carer_rel in carer_rels:
-            pass
-
-        partner.save()
+        if (partner is not None):
+            partner.set_partner(member)
+            partner.save()
 
         return member

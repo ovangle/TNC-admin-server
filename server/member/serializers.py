@@ -61,7 +61,7 @@ class MemberSerializer(serializers.Serializer):
         residential_status = self.fields['residential_status'].create(validated_data.pop('residential_status'))
         contact = self.fields['contact'].create(validated_data.pop('contact'))
         income = self.fields['income'].create(validated_data.pop('income'))
-        energy_account = self.fields['energy_accounts'].create(validated_data.pop('energy_accounts'))
+        energy_accounts = self.fields['energy_accounts'].create(validated_data.pop('energy_accounts'))
 
         return Member.objects.create(
             name=name,
@@ -75,7 +75,9 @@ class MemberSerializer(serializers.Serializer):
             residential_status=residential_status,
             contact=contact,
             income=income,
-            energy_account=energy_account,
+            
+            electricity_account=energy_accounts.get('ELECTRICITY', None),
+            gas_account=energy_accounts.get('GAS', None),
 
             partner=validated_data.pop('partner')
         )

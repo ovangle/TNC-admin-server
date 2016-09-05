@@ -8,7 +8,7 @@ def start_of_next_financial_year(date):
     if date.month >= 7:
         # The end of financial year is in june the next year in months after July
         year += 1
-    return datetime(date, 7, 1)
+    return datetime(year, 7, 1)
 
 def membership_expires(membership_type, joined, renewed=None):
     membership_start = joined
@@ -27,8 +27,6 @@ def membership_expires(membership_type, joined, renewed=None):
         return membership_start
     else:
         raise ValueError('Invalid membership term type: "{0}"'.format(type))
-
-
 
 class MembershipTermManager(models.Manager):
     def create(self, membership_type, joined):

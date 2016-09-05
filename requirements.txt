@@ -3,3 +3,6 @@ djangorestframework>=3.0.2
 psycopg2>=2.5.4
 django-cors-headers>=1.1.0
 uwsgi>=2.0.13
+
+requests>=2.11.1
+python-dateutil>=2.0.0

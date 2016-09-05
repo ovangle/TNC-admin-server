@@ -10,6 +10,11 @@ class MemberList(generics.ListCreateAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
 
+    def get_queryset(self):
+        qs = super(MemberList, self).get_queryset()
+        qs = qs.order_by('-updated')
+        return qs
+
     def list(self, request):
         return super(MemberList, self).list(request)
 

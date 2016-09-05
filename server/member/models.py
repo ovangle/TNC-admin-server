@@ -71,6 +71,8 @@ class Member(models.Model):
     partner = models.OneToOneField('member.Member', null=True, related_name='+') 
     carer = models.OneToOneField(Carer, related_name='member_carer')
 
+    updated = models.DateTimeField(auto_now=True)
+
     def set_partner(self, partner):
         if partner == self.partner:
             return

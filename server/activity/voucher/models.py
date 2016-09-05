@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 from member.basic.models import EnergyAccountBill
 
 from ..task.models import Task
 
 from .managers import EAPAVoucherManager, FoodcareVoucherManager, ChemistVoucherManager
+from .eapa_voucher_book import EAPAVoucherBook, EAPAVoucherBookField
 
 class Voucher(models.Model):
     task = models.OneToOneField(Task)
@@ -37,6 +39,11 @@ class EAPAVoucher(Voucher):
     is_customer_declaration_signed = models.BooleanField()
     is_assessor_declaration_signed = models.BooleanField()
 
+    voucher_books = ArrayField(
+        base_field=EAPAVoucherBookField(),
+        default=list
+    )
+
     def __init__(self, *args, **kwargs):
         super(EAPAVoucher, self).__init__(*args, **kwargs)
         self.kind = EAPAVoucher.objects.kind
@@ -51,7 +58,6 @@ class EAPAVoucher(Voucher):
         if self.electricity_bill is not None:    
             bills['ELECTRICITY'] = self.electricity_bill
         return bills 
-
 
 class ChemistVoucher(Voucher):
     objects = ChemistVoucherManager()
