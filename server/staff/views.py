@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from .models import StaffMember
-from .serializers import StaffMemberSerializer
+from .serializers import StaffMemberSerializer, CreateRequestSerializer
 
 class StaffMemberList(generics.ListCreateAPIView):
     queryset = StaffMember.objects.all()

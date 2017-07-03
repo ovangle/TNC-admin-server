@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from rest_framework import views, status, generics
 from rest_framework.response import Response
@@ -63,12 +63,17 @@ class LoginUser(views.APIView):
         user_serializer = UserSerializer(user)
         return Response(data=user_serializer.data, status=200) 
 
+class LogoutUser(views.APIView):
+    def put(self, request):
+        logout(request) 
+        return Response(data={}, status=200)
+
 class InitializeContext(views.APIView):
     queryset = User.objects.all()
 
     def get(self, request):
         if request.user.is_anonymous():
-            return Response(status=401, data={})
+            return Response(status=403, data={})
 
         serializer = UserSerializer(request.user)
         return Response(status=200, data=serializer.data)

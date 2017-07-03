@@ -13,3 +13,14 @@ class Task(models.Model):
     member = models.ForeignKey(Member)
     type = EnumField(enum_type=TaskType)
     at = models.DateTimeField(auto_now_add=True)
+
+    def get_voucher(self):
+        """ 
+        Returns the voucher associated with this task (if one exists)
+        otherwise None
+        """
+        try: 
+            voucher = self.voucher
+        except AttributeError: 
+            return None
+        return voucher.get_subkind_instance()

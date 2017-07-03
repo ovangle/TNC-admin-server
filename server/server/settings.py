@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'member',
     'staff',
     'user',
-    'activity'
+    'activity',
+    'chemist'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -90,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tnc_data',
         'USER': 'tnc_data',
-        'PASSWORD': 'tnc_dev',
+        'PASSWORD': 'tnc_dev    ',
         'ATOMIC_REQUESTS': True
     }
 }
@@ -139,7 +140,7 @@ STATIC_URL = '/static/'
 # Cors configuration
 
 CORS_ORIGIN_REGEX_WHITELIST = (
-    '^(https?://127.0.01:\d{4}/'
+    '^(https?://127.0.0.1:\d{4}/'
  )
 CORS_ALLOW_CREDENTIALS = True
 

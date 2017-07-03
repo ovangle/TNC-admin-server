@@ -6,7 +6,6 @@ from member.models import Member
 from member.basic.serializers import NameSerializer
 
 from ..voucher.models import FoodcareVoucher, ChemistVoucher, EAPAVoucher
-from ..voucher.serializers import VoucherSerializer, FoodcareVoucherSerializer, ChemistVoucherSerializer, EAPAVoucherSerializer
 
 
 from .models import Task
@@ -35,21 +34,10 @@ class TaskSerializer(serializers.Serializer):
 
     at = serializers.DateTimeField(read_only=True)
 
-    voucher = VoucherSerializer(required=False)
-
     def validate(self, data):
         task_type = data.get('type')
         data = self._check_issue_voucher(data, task_type is TaskType.issue_voucher)
         return data
-
-    def _check_issue_voucher(self, data, is_issue_voucher=False):
-        if is_issue_voucher:
-            if data.get('voucher') is None:
-                raise ValidationError('A `voucher` is required for a task type `ISSUE_VOUCHER`')
-        else:    
-            if data.get('voucher') is not None:
-                raise ValidationError('A `voucher` can only be provided for task type `ISSUE_VOUCHER`')
-        return data        
 
     def create(self, validated_data):      
         staff_member = validated_data.get('staff_member')
@@ -63,11 +51,6 @@ class TaskSerializer(serializers.Serializer):
             type=task_type,
         )
         task.save()
-
-        if task_type is TaskType.issue_voucher:
-            voucher_serializer = VoucherSerializer(data=validated_data.get('voucher'))
-            voucher_serializer.is_valid()
-            task.voucher = voucher_serializer.save(task=task)
         return task
 
 

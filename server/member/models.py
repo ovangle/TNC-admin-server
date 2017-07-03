@@ -106,4 +106,14 @@ def create_carer(instance, created, raw, **kwargs):
 
     instance.save()
 
+def get_member_or_dependent(kind, id):
+    if kind == Member.kind:
+        model_cls = Member
+    elif kind == Dependent.kind:
+        model_cls = Dependent
+    else:
+        raise ValueError('kind must be one of {0}'.format([Member.kind, Dependent.kind]))
+    return model_cls.objects.get(pk=id)
+
+
 models.signals.post_save.connect(create_carer, sender=Member, dispatch_uid='create_carer')    

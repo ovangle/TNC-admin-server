@@ -1,32 +1,28 @@
 from rest_framework import generics
 
 
-from .models import Task
-from .serializers import TaskSerializer
+from .models import Task, Voucher
+from .serializers import ActivitySerializer
 
-class ActivityList(generics.ListCreateAPIView):
-    serializer_class = TaskSerializer 
+class ActivityList(generics.ListAPIView):
+    serializer_class = ActivitySerializer 
     queryset = Task.objects.all()
 
     def get_queryset(self):
-        qs = super(ActivityList, self).get_queryset()
-
-        qs = qs.order_by('-at')
+        qs = Task.objects.all()
 
         member_id = self.request.query_params.get('member')
         if member_id is not None:
             qs = qs.filter(member__id=member_id)
 
+        staff_member_id = self.request.query_params.get('staff')
+        if staff_member_id is not None:
+            qs = qs.filter(staff__id=staff_member_id)
+
+        qs = (qs
+            .select_related('voucher')
+            .order_by('-at')
+        )     
+
         return qs
-
-    def perform_create(self, serializer):
-        user = self.request.user
-        return serializer.save(staff_member=user.staffmember)
-
-
-class ActivityDetails(generics.RetrieveUpdateAPIView):
-    serializer_class = TaskSerializer
-    queryset = Task.objects.all()
-    lookup_url_kwarg = 'id'
-
 

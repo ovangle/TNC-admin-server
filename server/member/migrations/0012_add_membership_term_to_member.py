@@ -9,19 +9,22 @@ from member.models import Member
 from member.membership_term.models import MembershipTerm, MembershipTermType
 
 def upgrade_members(apps, schema_editor):
-    members = Member.objects.all()
-    for member in members:
-        add_membership_term_to_member(member)
+    pass 
+    #members = Member.objects.all()
+    #for member in members:
+    #    add_membership_term_to_member(member)
 
 def add_membership_term_to_member(member):
-    membership_term = MembershipTerm.objects.create(
-        type=MembershipTermType.temporary,
-        joined=datetime.now(),
-        renewed=None,
-        expires=datetime.now()
-    )
-    member.term = membership_term
-    member.save()
+    pass
+
+    #membership_term = MembershipTerm.objects.create(
+    #    type=MembershipTermType.temporary,
+    #    joined=datetime.now(),
+    #    renewed=None,
+    #    expires=datetime.now()
+    #)
+    #member.term = membership_term
+    #member.save()
 
 
 class Migration(migrations.Migration):
